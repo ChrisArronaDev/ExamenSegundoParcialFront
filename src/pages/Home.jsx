@@ -20,11 +20,13 @@ export default function Home() {
           <input
             type="text"
             className="form-control"
-            placeholder="Ejemplo: perfume, laptop, zapatos..."
+            placeholder="Ejemplo: Essence, beauty, Glamour..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
-          <button className="btn btn-primary" type="submit">Buscar</button>
+          <button className="btn btn-primary" type="submit">
+            Buscar
+          </button>
         </div>
       </form>
     </div>

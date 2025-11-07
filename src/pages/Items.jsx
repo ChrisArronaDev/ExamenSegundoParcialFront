@@ -13,11 +13,11 @@ export default function Items() {
       axios
         .get(`${API_URL}/items?q=${query}`)
         .then((res) => {
-          // Aseguramos que la respuesta sea un array
-          if (Array.isArray(res.data)) {
+          // ✅ El backend devuelve { total, results: [...] }
+          if (Array.isArray(res.data.results)) {
+            setProducts(res.data.results);
+          } else if (Array.isArray(res.data)) {
             setProducts(res.data);
-          } else if (Array.isArray(res.data.items)) {
-            setProducts(res.data.items);
           } else {
             console.error("⚠️ Estructura inesperada:", res.data);
             setProducts([]);
@@ -35,11 +35,9 @@ export default function Items() {
       <h2>
         Resultados para: <strong>{query}</strong>
       </h2>
-      <p>
-        {Array.isArray(products) ? products.length : 0} productos encontrados
-      </p>
+      <p>{products.length} productos encontrados</p>
 
-      {Array.isArray(products) && products.length > 0 ? (
+      {products.length > 0 ? (
         <div className="row">
           {products.map((p) => (
             <div key={p.id} className="col-md-4 mb-4">
